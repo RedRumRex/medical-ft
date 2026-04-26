@@ -1248,6 +1248,264 @@
         color: var(--ink);
         width: 40px;
       }
+
+      /* ── HAMBURGER MENU ── */
+      .nav-hamburger {
+        display: none;
+        flex-direction: column;
+        gap: 5px;
+        cursor: pointer;
+        padding: 4px;
+        background: none;
+        border: none;
+        z-index: 600;
+      }
+      .nav-hamburger span {
+        display: block;
+        width: 22px;
+        height: 2px;
+        background: var(--ink);
+        transition: transform 0.3s ease, opacity 0.3s ease;
+        transform-origin: center;
+      }
+      .nav-hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+      .nav-hamburger.open span:nth-child(2) { opacity: 0; }
+      .nav-hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+      /* Mobile nav drawer */
+      .nav-mobile-drawer {
+        display: none;
+        position: fixed;
+        top: 60px;
+        left: 0;
+        right: 0;
+        background: rgba(244, 243, 239, 0.98);
+        backdrop-filter: blur(12px);
+        border-bottom: 1px solid var(--border);
+        z-index: 490;
+        padding: 20px 24px 28px;
+        flex-direction: column;
+        gap: 0;
+        transform: translateY(-8px);
+        opacity: 0;
+        transition: transform 0.28s ease, opacity 0.28s ease;
+      }
+      .nav-mobile-drawer.open {
+        display: flex;
+        transform: translateY(0);
+        opacity: 1;
+      }
+      .nav-mobile-drawer a {
+        font-family: var(--mono);
+        font-size: 11px;
+        letter-spacing: 0.18em;
+        text-transform: uppercase;
+        color: var(--ink-3);
+        text-decoration: none;
+        padding: 14px 0;
+        border-bottom: 1px solid var(--border);
+        transition: color 0.2s;
+      }
+      .nav-mobile-drawer a:hover { color: var(--accent); }
+      .nav-mobile-drawer a.nav-demo-mobile {
+        color: var(--accent);
+        margin-top: 16px;
+        border: 1px solid var(--accent);
+        padding: 12px 16px;
+        text-align: center;
+        border-bottom: 1px solid var(--accent);
+      }
+
+      /* ─────────────────────────────────────────────
+         MOBILE BREAKPOINTS
+      ───────────────────────────────────────────── */
+      @media (max-width: 900px) {
+
+        /* Nav */
+        nav {
+          grid-template-columns: 1fr auto;
+          padding: 0 20px;
+        }
+        .nav-right { display: none; }
+        .nav-hamburger { display: flex; }
+
+        /* Disable custom cursor on touch */
+        body { cursor: auto; }
+        #cur { display: none; }
+
+        /* Hero: stack columns */
+        .hero {
+          grid-template-columns: 1fr;
+          min-height: auto;
+        }
+        .hero-left {
+          padding: 48px 24px 40px;
+          border-right: none;
+          border-bottom: 1px solid var(--border);
+        }
+        .hero-right {
+          padding: 40px 24px 48px;
+        }
+        .hero-headline {
+          font-size: clamp(48px, 13vw, 80px);
+        }
+        .hero-stats {
+          grid-template-columns: 1fr 1fr 1fr;
+        }
+        .hero-stat-n { font-size: 28px; }
+
+        /* Sections */
+        section { padding: 64px 24px; }
+
+        /* Problem */
+        .problem-layout {
+          grid-template-columns: 1fr;
+          gap: 48px;
+        }
+
+        /* Project */
+        .project-layout {
+          grid-template-columns: 1fr;
+          gap: 48px;
+        }
+        .task-tiles { width: 100%; }
+
+        /* Score dims: 2-col on tablet */
+        .score-dims {
+          grid-template-columns: 1fr 1fr;
+        }
+
+        /* Training */
+        .training-layout {
+          grid-template-columns: 1fr;
+          gap: 48px;
+        }
+
+        /* Tech: 2-col on tablet */
+        .tech-grid {
+          grid-template-columns: 1fr 1fr;
+        }
+        .tech-card {
+          border-right: none;
+          border-bottom: 1px solid var(--border);
+        }
+        .tech-card:last-child { border-bottom: none; }
+
+        /* CTA */
+        .cta-section {
+          grid-template-columns: 1fr;
+          gap: 40px;
+          padding: 80px 24px;
+        }
+        .cta-title { font-size: clamp(44px, 12vw, 80px); }
+
+        /* Improvements inline grids */
+        .impr-grid-2col {
+          grid-template-columns: 1fr !important;
+          gap: 40px !important;
+        }
+
+        /* Footer */
+        footer {
+          flex-direction: column;
+          gap: 20px;
+          padding: 28px 24px;
+          text-align: center;
+        }
+        .footer-r { flex-wrap: wrap; gap: 16px; justify-content: center; }
+        .footer-cross { display: none; }
+      }
+
+      @media (max-width: 600px) {
+
+        /* Nav */
+        nav { padding: 0 16px; }
+        .nav-left { font-size: 9px; }
+
+        /* Hero */
+        .hero-left { padding: 40px 16px 32px; }
+        .hero-right { padding: 32px 16px 40px; }
+        .hero-headline { font-size: clamp(40px, 14vw, 68px); }
+        .hero-stats { grid-template-columns: 1fr 1fr; }
+        .hero-stat:last-child {
+          grid-column: 1 / -1;
+          border-right: none;
+          border-top: 1px solid var(--border);
+          padding-left: 0;
+        }
+        .hero-stat-n { font-size: 32px; }
+
+        /* Sections */
+        section { padding: 48px 16px; }
+        .section-meta { margin-bottom: 40px; }
+        .section-title { font-size: clamp(34px, 11vw, 60px); }
+        .body-text { font-size: 15px; }
+
+        /* Scenario card */
+        .scenario-card { padding: 24px 16px; }
+        .vitals-grid { grid-template-columns: 1fr 1fr; gap: 10px; }
+
+        /* ESI table: hide meaning col on small screens */
+        .esi-meaning-col { display: none; }
+        .esi-table thead th:last-child { display: none; }
+
+        /* Project task tiles */
+        .task-tile {
+          grid-template-columns: auto 1fr;
+          gap: 12px;
+        }
+        .task-tile-score { display: none; }
+        .task-tile-n { font-size: 36px; }
+
+        /* Score dims: single col on phone */
+        .score-dims { grid-template-columns: 1fr; }
+        .score-dim {
+          border-right: none !important;
+          border-bottom: 1px solid var(--border) !important;
+        }
+        .score-dim:last-child { border-bottom: none !important; }
+
+        /* Compare table: compress */
+        .compare-table td:first-child { width: 90px; font-size: 10px; }
+        .compare-table td { font-size: 11px; padding: 10px 0; }
+
+        /* Tech: single col on phone */
+        .tech-grid { grid-template-columns: 1fr; }
+        .tech-card { padding: 28px 20px; }
+
+        /* Training flow nodes */
+        .flow-node { padding: 18px 16px; gap: 14px; }
+
+        /* CTA */
+        .cta-section { padding: 56px 16px; }
+        .cta-title { font-size: clamp(40px, 13vw, 68px); }
+        .cta-actions { flex-direction: column; }
+        .btn-primary, .btn-secondary { text-align: center; padding: 14px 20px; }
+
+        /* Improvements chart panels */
+        .impr-panel { padding: 20px 16px !important; }
+        .impr-metrics-grid { grid-template-columns: repeat(2, 1fr) !important; }
+
+        /* Score bars */
+        .score-bar-wrap { flex-wrap: wrap; gap: 8px; }
+        .score-bar-label { width: auto; text-align: left; }
+
+        /* Mobile drawer */
+        .nav-mobile-drawer { padding: 16px 16px 24px; }
+
+        /* Footer */
+        footer { padding: 24px 16px; }
+        .footer-l { font-size: 9px; }
+        .footer-r { gap: 12px; }
+        .footer-r a { font-size: 9px; }
+      }
+
+      /* Tablet-only: improvements 2-col layout */
+      @media (min-width: 601px) and (max-width: 900px) {
+        .impr-metrics-grid {
+          grid-template-columns: repeat(2, 1fr) !important;
+        }
+      }
     </style>
   </head>
   <body>
@@ -1282,7 +1540,22 @@
           >Live Demo ↗</a
         >
       </div>
+      <!-- Hamburger (mobile only) -->
+      <button class="nav-hamburger" id="nav-hamburger" aria-label="Toggle menu">
+        <span></span><span></span><span></span>
+      </button>
     </nav>
+
+    <!-- Mobile nav drawer -->
+    <div class="nav-mobile-drawer" id="nav-mobile-drawer">
+      <a href="#problem" class="nav-drawer-link">Problem</a>
+      <a href="#project" class="nav-drawer-link">Project</a>
+      <a href="#training" class="nav-drawer-link">Training</a>
+      <a href="#improvements" class="nav-drawer-link">Results</a>
+      <a href="#tech" class="nav-drawer-link">Stack</a>
+      <a href="#contact" class="nav-drawer-link">Contact</a>
+      <a href="https://huggingface.co/spaces/purunjaybhardwaj/medical-triage-hackathon" target="_blank" class="nav-demo-mobile">Live Demo ↗</a>
+    </div>
 
     <!-- HERO -->
     <section class="hero" id="hero">
@@ -1769,6 +2042,7 @@
           align-items: start;
           margin-bottom: 64px;
         "
+        class="impr-grid-2col"
       >
         <div>
           <h2 class="section-title reveal" style="margin-bottom: 32px">
@@ -2107,6 +2381,7 @@
               gap: 12px;
               margin-bottom: 28px;
             "
+            class="impr-metrics-grid"
           >
             <div style="padding: 16px; border: 1px solid var(--border)">
               <div
@@ -2337,6 +2612,7 @@
               gap: 12px;
               margin-bottom: 28px;
             "
+            class="impr-metrics-grid"
           >
             <div style="padding: 16px; border: 1px solid var(--border)">
               <div
@@ -2567,6 +2843,7 @@
               gap: 12px;
               margin-bottom: 28px;
             "
+            class="impr-metrics-grid"
           >
             <div style="padding: 16px; border: 1px solid var(--border)">
               <div
@@ -3179,6 +3456,21 @@
         },
         { passive: true },
       );
+
+      // ── Hamburger menu ──
+      const hamburger = document.getElementById("nav-hamburger");
+      const mobileDrawer = document.getElementById("nav-mobile-drawer");
+      hamburger.addEventListener("click", () => {
+        hamburger.classList.toggle("open");
+        mobileDrawer.classList.toggle("open");
+      });
+      // Close drawer when a link is clicked
+      mobileDrawer.querySelectorAll("a").forEach((link) => {
+        link.addEventListener("click", () => {
+          hamburger.classList.remove("open");
+          mobileDrawer.classList.remove("open");
+        });
+      });
 
       // Custom cursor
       const cur = document.getElementById("cur");
